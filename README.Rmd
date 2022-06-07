@@ -4,16 +4,33 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  echo = FALSE,
+  warning = F,
+  error = F
 )
+
+library(readr)
+library(tidyverse)
+Species <- read_csv("https://raw.githubusercontent.com/derek-corcoran-barrios/OikosRepoducibleResearch/master/Species.csv")
+
 ```
 
 # ExampleReproducibleResearch
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-The goal of ExampleReproducibleResearch is to make an example repository where I will work through examples of reproducible research
+The goal of ExampleReproducibleResearch is to make an example repository where I will work through examples of reproducible research. I will explore the species dataset in order to try to find *relationships* between their abundance and **enviromental variables**.
+
+For exmaple in the following figure we will se the relationship between the abundance of species 4 and annual mean temperature
+
+```{r plotspp4temp, fig.cap="Temperature vs Abundance"}
+ggplot(Species, aes(x = bio_1, y = abund_sp4)) + geom_point() + theme_bw()
+```
+
+In our dataset the number of observatios is `r prettyNum(nrow(Species), big.mark = ",")`, the mean temperature in the sites is `r round(mean(Species$bio_1), 2)`
